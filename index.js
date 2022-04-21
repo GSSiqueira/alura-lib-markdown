@@ -2,7 +2,7 @@ import chalk from "chalk";
 import fs from "fs";
 
 function errorCheck(error) {
-  throw new Error(chalk.red(error.code, "File not found!"));
+  throw new Error(chalk.red(error.code, error.message));
 }
 
 function extractLinks(text) {
@@ -13,18 +13,19 @@ function extractLinks(text) {
   while ((temp = regex.exec(text)) !== null) {
     results.push({ [temp[1]]: temp[2] });
   }
-  return results;
+  if (results.length === 0) {
+    return "No links were found.";
+  } else {
+    return results;
+  }
 }
 
-async function getFile(filePath) {
+export default async function getFile(filePath) {
   const encoding = "utf-8";
   try {
     const data = await fs.promises.readFile(filePath, encoding);
-    console.log(chalk.yellow(data));
-    console.log(extractLinks(data));
+    return extractLinks(data);
   } catch (error) {
     errorCheck(error);
   }
 }
-
-getFile("./files/text1.md");
