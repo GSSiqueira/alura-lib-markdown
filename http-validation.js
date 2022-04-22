@@ -19,7 +19,12 @@ export default async function checkURLs(data) {
   let results = [];
   for (let page = 0; page < data.length; page++) {
     let temp = getURLs(data[page]);
-    results.push(await checkStatus(temp));
+    let statuses = await checkStatus(temp);
+    let finalPage = [];
+    for (let link = 0; link < data[page].length; link++) {
+      finalPage.push({ ...data[page][link], status: statuses[link] });
+    }
+    results.push(finalPage);
   }
   return results;
 }
