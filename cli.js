@@ -5,7 +5,7 @@ const filePath = process.argv[2];
 
 async function processText(filePath) {
   const result = await getFilesOnPath(filePath);
-  const checkedLinks = checkURLs(result);
+  const checkedLinks = await checkURLs(result);
   console.log(chalk.yellow("Checked list: \n"), checkedLinks);
 }
 
