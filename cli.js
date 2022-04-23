@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import getFilesOnPath from "./index.js";
 import checkURLs from "./http-validation.js";
 import chalk from "chalk";

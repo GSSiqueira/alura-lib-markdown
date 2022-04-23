@@ -5,7 +5,7 @@ import fs from "fs";
 const __dirname = process.env.PWD;
 
 function errorCheck(error) {
-  throw new Error(error.code, error.message);
+  throw new Error("No files were found.");
 }
 
 function extractLinks(text) {
